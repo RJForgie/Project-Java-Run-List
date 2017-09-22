@@ -4,10 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
@@ -23,27 +22,24 @@ public class PlanActivity extends AppCompatActivity {
         Plan plan  = new Plan();
         ArrayList<Run> week = plan.getWeek();
 
-        PlanAdapter planAdapter = new PlanAdapter(this, week);
+        Tracker tracker = new Tracker();
+
+        PlanAdapter planAdapter = new PlanAdapter(this, week, tracker);
 
         ListView listView = (ListView) findViewById(R.id.week);
         listView.setAdapter(planAdapter);
 
-        Tracker tracker = new Tracker();
+
 
         counterView = (TextView) findViewById(R.id.counter_view);
         counterView.setText(Integer.toString(tracker.getCount()));
+//
+//        View button = findViewById(R.id.toggleButton);
+//        button.setTag(tracker);
+
 
     }
 
-    ToggleButton toggle = (ToggleButton) findViewById(R.id.togglebutton);
-    toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
-                // The toggle is enabled
-            } else {
-                // The toggle is disabled
-            }
-        }
-    });
+
 
 }
