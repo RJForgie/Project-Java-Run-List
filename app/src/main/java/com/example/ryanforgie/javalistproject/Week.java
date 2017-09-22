@@ -8,21 +8,20 @@ import java.util.ArrayList;
 
 public class Week {
 
-    private ArrayList<Run> list;
+    private ArrayList<Run> week;
 
-
-    public Week(ArrayList<Run> list) {
-        list = new ArrayList<Run>();
-        list.add(new Run(Type.REST, 0));
-        list.add(new Run(Type.REST, 0));
-        list.add(new Run(Type.REST, 0));
-        list.add(new Run(Type.REST, 0));
-        list.add(new Run(Type.REST, 0));
-        list.add(new Run(Type.REST, 0));
-        list.add(new Run(Type.REST, 0));
+    public Week() {
+        week = new ArrayList<Run>();
+        week.add(new Run(Type.REST, 0));
+        week.add(new Run(Type.REST, 0));
+        week.add(new Run(Type.REST, 0));
+        week.add(new Run(Type.REST, 0));
+        week.add(new Run(Type.REST, 0));
+        week.add(new Run(Type.REST, 0));
+        week.add(new Run(Type.REST, 0));
     }
 
     public ArrayList<Run> getWeek() {
-        return new ArrayList<Run>(list);
+        return new ArrayList<Run>(week);
     }
 }
