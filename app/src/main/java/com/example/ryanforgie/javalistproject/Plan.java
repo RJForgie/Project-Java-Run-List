@@ -6,11 +6,11 @@ import java.util.ArrayList;
  * Created by ryanforgie on 22/09/2017.
  */
 
-public class Week {
+public class Plan {
 
     private ArrayList<Run> week;
 
-    public Week() {
+    public Plan() {
         week = new ArrayList<Run>();
         week.add(new Run(Type.REST, 0));
         week.add(new Run(Type.REST, 0));

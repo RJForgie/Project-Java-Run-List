@@ -7,24 +7,24 @@ import static junit.framework.Assert.assertEquals;
 /**
  * Created by ryanforgie on 22/09/2017.
  */
-public class WeekTest {
+public class PlanTest {
 
     Run run;
-    Week week;
+    Plan plan;
 
     @Before
     public void before() {
-        week = new Week();
+        plan = new Plan();
     }
 
     @Test
     public void testWeekListStartsPopulated() {
-        assertEquals(7, week.getWeek().size());
+        assertEquals(7, plan.getWeek().size());
     }
 
     @Test
     public void testWeekPopulatedWithRuns() {
-        assertEquals(Type.REST, week.getWeek().get(0).getType());
+        assertEquals(Type.REST, plan.getWeek().get(0).getType());
 
     }
 

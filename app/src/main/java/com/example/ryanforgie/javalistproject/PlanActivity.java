@@ -8,25 +8,22 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class WeekActivity extends AppCompatActivity {
+public class PlanActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week);
 
-        Week week = new Week();
-        ArrayList<Run> week = Week.getW();
+        Plan plan  = new Plan();
+        ArrayList<Run> week = plan.getWeek();
 
-        WeekAdapter runAdapter = new TopCitiesAdapter(this, week);
+        PlanAdapter planAdapter = new PlanAdapter(this, week);
 
         ListView listView = (ListView) findViewById(R.id.week);
-        listView.setAdapter(cityAdapter);
+        listView.setAdapter(planAdapter);
 
-    }
 
-    public void getCity(View listItem){
-        Run run = (Run) listItem.getTag();
     }
 
 }

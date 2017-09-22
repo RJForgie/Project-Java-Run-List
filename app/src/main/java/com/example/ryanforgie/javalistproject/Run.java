@@ -9,7 +9,7 @@ public class Run {
     private Type type;
     private int distance;
 
-    public Run(Type type, int distance) {
+    public Run(Type type, Integer distance) {
         this.type = type;
         this.distance = distance;
     }
@@ -18,7 +18,7 @@ public class Run {
         return type;
     }
 
-    public int getDistance() {
+    public Integer getDistance() {
         return distance;
     }
 }
