@@ -46,15 +46,17 @@ public class PlanActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, DetailsActivity.class);
 
+        intent.putExtra("runToShow", selectedRun.getType().toString());
 
-        if (selectedRun.getType().toString().equals("REST")) {
-            intent.putExtra("runToShow", getResources().getString(R.string.easy));
-        }
-        else {
-            if (selectedRun.getType().toString().equals("TEMPO")) {
-                intent.putExtra("runToShow", getResources().getString(R.string.app_name));
-            }
-        }
+
+//        if (selectedRun.getType().toString().equals("REST")) {
+//            intent.putExtra("runToShow", getResources().getString(R.string.easy));
+//        }
+//        else {
+//            if (selectedRun.getType().toString().equals("TEMPO")) {
+//                intent.putExtra("runToShow", getResources().getString(R.string.app_name));
+//            }
+//        }
 
         startActivity(intent);
     }
