@@ -24,10 +24,27 @@ public class DetailsActivity extends AppCompatActivity {
         String runToShow = extras.getString("runToShow");
 
         if (runToShow.equals("REST")) {
+            runType.setText(getResources().getString(R.string.rest));
+        } else if (runToShow.equals("TEMPO")) {
+            runType.setText(getResources().getString(R.string.tempo));
+
+        } else if (runToShow.equals("RECOVERY")) {
             runType.setText(getResources().getString(R.string.recovery));
-        }
-        else if (runToShow.equals("TEMPO")) {
-            runType.setText(getResources().getString(R.string.app_name));
+
+        } else if (runToShow.equals("BASE")) {
+            runType.setText(getResources().getString(R.string.base));
+
+        } else if (runToShow.equals("LONG")) {
+            runType.setText(getResources().getString(R.string.long_run));
+
+        } else if (runToShow.equals("PROGRESSION")) {
+            runType.setText(getResources().getString(R.string.progression_run));
+
+        } else if (runToShow.equals("HILLREPEATS")) {
+            runType.setText(getResources().getString(R.string.hill_repeats));
+
+        } else if (runToShow.equals("INTERVALS")) {
+            runType.setText(getResources().getString(R.string.intervals));
 
         }
 
