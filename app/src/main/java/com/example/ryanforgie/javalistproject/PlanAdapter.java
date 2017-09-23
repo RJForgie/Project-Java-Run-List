@@ -50,13 +50,6 @@ public class PlanAdapter extends ArrayAdapter<Run> {
         TextView distance = listItemView.findViewById(R.id.distance);
         distance.setText(currentRun.getDistance().toString());
 
-
-//        ImageView flag = (ImageView) listItemView.findViewById(R.id.flag);
-//        flag.setImageResource(currentCity.getImageId());
-
-
-
-
         ToggleButton toggle = listItemView.findViewById(R.id.toggleButton);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -84,7 +77,9 @@ public class PlanAdapter extends ArrayAdapter<Run> {
 
     }
 
-
-
-
 }
+
+
+//        ImageView flag = (ImageView) listItemView.findViewById(R.id.flag);
+//        flag.setImageResource(currentCity.getImageId());
+

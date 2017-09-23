@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
 public class PlanActivity extends AppCompatActivity {
 
     TextView counterView;
+    Button resetButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +32,8 @@ public class PlanActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.week);
         listView.setAdapter(planAdapter);
 
-
-
         counterView = (TextView) findViewById(R.id.counter_view);
         counterView.setText(Integer.toString(tracker.getCount()));
-//
-//        View button = findViewById(R.id.toggleButton);
-//        button.setTag(tracker);
-
 
     }
 
@@ -48,6 +44,21 @@ public class PlanActivity extends AppCompatActivity {
 
         intent.putExtra("runToShow", selectedRun.getType().toString());
 
+        startActivity(intent);
+    }
+
+    public void onResetButtonClicked(View button) {
+        for(int i = 0; i < 3; ++i) {
+            ToggleButton tglbtn = (ToggleButton) findViewById(R.id.toggleButton);
+            tglbtn.setChecked(false);
+        }
+
+    }
+}
+
+//
+//        View button = findViewById(R.id.toggleButton);
+//        button.setTag(tracker);
 
 //        if (selectedRun.getType().toString().equals("REST")) {
 //            intent.putExtra("runToShow", getResources().getString(R.string.easy));
@@ -57,10 +68,3 @@ public class PlanActivity extends AppCompatActivity {
 //                intent.putExtra("runToShow", getResources().getString(R.string.app_name));
 //            }
 //        }
-
-        startActivity(intent);
-    }
-
-
-
-}
