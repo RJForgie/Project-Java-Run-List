@@ -2,6 +2,7 @@ package com.example.ryanforgie.javalistproject;
 
 import android.content.Context;
 import android.icu.text.LocaleDisplayNames;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,23 +61,21 @@ public class PlanAdapter extends ArrayAdapter<Run> {
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+                AppCompatActivity planActivity = (AppCompatActivity) buttonView.getContext();
+
+                TextView counterView = (TextView) planActivity.findViewById(R.id.counter_view);
 
                 if (isChecked) {
-//                    int currentCount = tracker.getCount();
-//                    tracker.setCount(currentCount += 1);
-//                    Context context = PlanAdapter.this.getContext();
-//                    context
-//                    TextView counterView = (TextView) buttonView.getTag();
-//                    counterView.setText(Integer.toString(tracker.getCount()));
-//
-//
-//
-                } else {
-                    // The toggle is disabled
-                }
-            }
-        });
+                    int currentCount = tracker.getCount();
+                    tracker.setCount(currentCount + 1);
+                    counterView.setText(Integer.toString(tracker.getCount()));
 
+                } else {
+                    int currentCount = tracker.getCount();
+                    tracker.setCount(currentCount - 1);
+                    counterView.setText(Integer.toString(tracker.getCount()));
+                }
+            }});
 
 
         listItemView.setTag(currentRun);
