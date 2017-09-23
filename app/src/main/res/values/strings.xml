@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">JavaListProject</string>
+    <string name="easy">Easy Run Description</string>
+
 </resources>

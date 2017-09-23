@@ -13,7 +13,7 @@ public class Plan {
     public Plan() {
         week = new ArrayList<Run>();
         week.add(new Run(Type.REST, 0));
-        week.add(new Run(Type.REST, 0));
+        week.add(new Run(Type.TEMPO, 0));
         week.add(new Run(Type.REST, 0));
         week.add(new Run(Type.REST, 0));
         week.add(new Run(Type.REST, 0));

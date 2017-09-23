@@ -8,6 +8,7 @@ import android.widget.TextView;
 public class DetailsActivity extends AppCompatActivity {
 
     TextView runType;
+    TextView runDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +16,7 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         runType = (TextView) findViewById(R.id.run_type);
+        runDescription = (TextView) findViewById(R.id.run_description);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -22,5 +24,9 @@ public class DetailsActivity extends AppCompatActivity {
         String runToShow = extras.getString("runToShow");
 
         runType.setText(runToShow);
+
+
     }
+
+
 }
