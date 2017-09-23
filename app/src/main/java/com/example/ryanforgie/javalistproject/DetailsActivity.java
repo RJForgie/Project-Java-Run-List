@@ -24,10 +24,10 @@ public class DetailsActivity extends AppCompatActivity {
         String runToShow = extras.getString("runToShow");
 
         if (runToShow.equals("REST")) {
-            runType.setText(getResources().getString(R.string.app_name));
+            runType.setText(getResources().getString(R.string.recovery));
         }
         else if (runToShow.equals("TEMPO")) {
-            runType.setText(getResources().getString(R.string.easy));
+            runType.setText(getResources().getString(R.string.app_name));
 
         }
 
