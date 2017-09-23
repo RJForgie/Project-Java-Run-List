@@ -68,14 +68,16 @@ public class PlanAdapter extends ArrayAdapter<Run> {
 //                    context
 //                    TextView counterView = (TextView) buttonView.getTag();
 //                    counterView.setText(Integer.toString(tracker.getCount()));
-
-
-
+//
+//
+//
                 } else {
                     // The toggle is disabled
                 }
             }
         });
+
+
 
         listItemView.setTag(currentRun);
 

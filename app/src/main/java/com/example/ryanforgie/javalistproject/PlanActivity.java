@@ -1,5 +1,6 @@
 package com.example.ryanforgie.javalistproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +39,16 @@ public class PlanActivity extends AppCompatActivity {
 //        button.setTag(tracker);
 
 
+    }
+
+    public void getRun(View listItem) {
+        Run selectedRun = (Run) listItem.getTag();
+
+        Intent intent = new Intent(this, DetailsActivity.class);
+
+        intent.putExtra("runToShow", selectedRun.getType().toString());
+
+        startActivity(intent);
     }
 
 
