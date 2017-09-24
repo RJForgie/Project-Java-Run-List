@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JavaListProject</string>
+    <string name="app_name">RunPlanner</string>
     <string name="rest">Put your feet up and take the day off</string>
     <string name="recovery">A recovery run is a relatively short run performed at an easy pace. Recovery runs serve to add a little mileage to a runner’s training without taking away from performance in the harder, more important workouts that precede and follow them. Recovery runs are best done as the next run after a hard workout such as an interval run. Do your recovery runs as slowly as necessary to feel relatively comfortable despite lingering fatigue from your previous run. Example: 4 miles easy</string>
     <string name="base">A base run is a relatively short to moderate-length run undertaken at a runner’s natural pace. While individual base runs are not meant to be challenging, they are meant to be done frequently, and in the aggregate they stimulate big improvements in aerobic capacity, endurance, and running economy. Base runs will make up a bulk of your weekly training mileage Example: 6 miles at natural pace</string>
