@@ -8,6 +8,8 @@ public class Run {
 
     private Type type;
     private int distance;
+    
+
 
     public Run(Type type, Integer distance) {
         this.type = type;

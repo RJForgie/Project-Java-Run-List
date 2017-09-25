@@ -1,7 +1,9 @@
 package com.example.ryanforgie.javalistproject;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.icu.text.LocaleDisplayNames;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +28,7 @@ public class PlanAdapter extends ArrayAdapter<Run> {
 
     Tracker tracker;
     ArrayList<ToggleButton> toggles;
+//    private static SharedPreferences prefs;
 
 
     public PlanAdapter(Context context, ArrayList<Run> week, Tracker tracker){
@@ -52,7 +55,10 @@ public class PlanAdapter extends ArrayAdapter<Run> {
         distance.setText(currentRun.getDistance().toString());
 
         ToggleButton toggle = listItemView.findViewById(R.id.toggleButton);
+//        listItemView.getTag();
+        toggle.setChecked(currentRun.completed);
         toggles.add(toggle);
+
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
@@ -60,23 +66,38 @@ public class PlanAdapter extends ArrayAdapter<Run> {
 
                 TextView counterView = (TextView) planActivity.findViewById(R.id.counter_view);
 
+
+
                 if (isChecked) {
                     int currentCount = tracker.getCount();
                     tracker.setCount(currentCount + 1);
                     counterView.setText(Integer.toString(tracker.getCount()));
+                    saveCounter();
+
 
                 } else {
                     int currentCount = tracker.getCount();
                     tracker.setCount(currentCount - 1);
                     counterView.setText(Integer.toString(tracker.getCount()));
+                    saveCounter();
                 }
             }});
+
 
 
         listItemView.setTag(currentRun);
 
         return listItemView;
 
+    }
+
+    public void saveCounter() {
+
+        PreferenceManager.getDefaultSharedPreferences(getContext())
+                .edit()
+                .putInt("counter", tracker.getCount())
+                .apply();
+        Log.d("Sharedpref", "Saved to sharedpref");
     }
 
 }

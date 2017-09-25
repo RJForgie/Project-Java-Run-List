@@ -1,6 +1,9 @@
 package com.example.ryanforgie.javalistproject;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,19 +30,28 @@ public class PlanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week);
 
-
         Plan plan  = new Plan();
         ArrayList<Run> week = plan.getWeek();
 
         tracker = new Tracker();
 
-       planAdapter = new PlanAdapter(this, week, tracker);
+        planAdapter = new PlanAdapter(this, week, tracker);
+
 
         ListView listView = (ListView) findViewById(R.id.week);
         listView.setAdapter(planAdapter);
 
+
+
         counterView = (TextView) findViewById(R.id.counter_view);
         counterView.setText(Integer.toString(tracker.getCount()));
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+//        int savedCounter = sharedPrefs.getInt("counter", 0);
+//
+//        tracker.setCount(savedCounter);
+
 
     }
 
@@ -57,15 +69,31 @@ public class PlanActivity extends AppCompatActivity {
         int currentCount = tracker.getCount();
         for (ToggleButton toggle : planAdapter.toggles) {
             if (!toggle.isChecked()) {
+                Log.d("lksajd", "hit the reset to 0");
                 tracker.setCount(currentCount = 0);
+                saveCounter();
+                counterView.setText(String.valueOf(currentCount));
             }
             else if(toggle.isChecked()){
                 tracker.setCount(currentCount + 1);
                 toggle.setChecked(false);
+                saveCounter();
+                counterView.setText(String.valueOf(currentCount));
             }
+
 
         }
 
+
+
+    }
+
+    public void saveCounter() {
+
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .edit()
+                .putInt("counter", tracker.getCount())
+                .apply();
 
     }
 }
