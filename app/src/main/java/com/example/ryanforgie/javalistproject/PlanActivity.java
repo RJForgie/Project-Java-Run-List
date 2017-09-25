@@ -94,6 +94,8 @@ public class PlanActivity extends AppCompatActivity {
 
         }
         planAdapter.notifyDataSetChanged();
+        Log.d("total", tracker.getCount().toString());
+        Log.d("size", Integer.toString(week.size()));
 
 //        finish();
 //        startActivity(getIntent());

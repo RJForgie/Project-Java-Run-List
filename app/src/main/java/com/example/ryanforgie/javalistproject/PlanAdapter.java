@@ -72,18 +72,20 @@ public class PlanAdapter extends ArrayAdapter<Run> {
                 Gson gson = new Gson();
                 TypeToken< ArrayList<Run> > runArrayTypeToken = new TypeToken<ArrayList<Run>>(){};
                 ArrayList<Run> week = gson.fromJson(weekJson, runArrayTypeToken.getType());
-                int position = currentRun.getDistance() - 1;
+                int id = currentRun.getId();
 
                 currentRun.switchStatus();
-                week.get(position).switchStatus();
+                week.get(id).switchStatus();
 
                 int currentCount = tracker.getCount();
                 if(currentRun.checkCompleted() == true){
                     tracker.setCount(currentCount + 1);
+
                 } else {
                     tracker.setCount(currentCount - 1);
                 }
                 saveCounter();
+                Log.d("total", tracker.getCount().toString());
                 counterView.setText(String.valueOf(tracker.getCount()));
 
                 sharedPreferences.edit()

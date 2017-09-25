@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 public class Run implements Serializable {
 
+    private int id;
     private Type type;
     private int distance;
     private boolean completed;
@@ -15,7 +16,8 @@ public class Run implements Serializable {
 
 
 
-    public Run(Type type, Integer distance, boolean completed) {
+    public Run(Integer id, Type type, Integer distance, boolean completed) {
+        this.id = id;
         this.type = type;
         this.distance = distance;
         this.completed = completed;
@@ -39,5 +41,9 @@ public class Run implements Serializable {
 
     public void switchStatus(){
         this.completed = !this.completed;
+    }
+
+    public int getId() {
+        return id;
     }
 }
