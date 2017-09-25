@@ -25,12 +25,13 @@ public class PlanAdapter extends ArrayAdapter<Run> {
 
 
     Tracker tracker;
+    ArrayList<ToggleButton> toggles;
+
 
     public PlanAdapter(Context context, ArrayList<Run> week, Tracker tracker){
         super(context, 0, week);
         this.tracker = tracker;
-
-
+        toggles = new ArrayList<ToggleButton>();
     }
 
     @Override
@@ -51,6 +52,7 @@ public class PlanAdapter extends ArrayAdapter<Run> {
         distance.setText(currentRun.getDistance().toString());
 
         ToggleButton toggle = listItemView.findViewById(R.id.toggleButton);
+        toggles.add(toggle);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 

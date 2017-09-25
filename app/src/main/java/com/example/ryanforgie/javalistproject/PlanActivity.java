@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+import android.widget.Toolbar;
 
 import java.util.ArrayList;
 
@@ -16,18 +17,22 @@ public class PlanActivity extends AppCompatActivity {
 
     TextView counterView;
     Button resetButton;
+    PlanAdapter planAdapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week);
 
+
         Plan plan  = new Plan();
         ArrayList<Run> week = plan.getWeek();
 
         Tracker tracker = new Tracker();
 
-        PlanAdapter planAdapter = new PlanAdapter(this, week, tracker);
+       planAdapter = new PlanAdapter(this, week, tracker);
 
         ListView listView = (ListView) findViewById(R.id.week);
         listView.setAdapter(planAdapter);
@@ -48,10 +53,10 @@ public class PlanActivity extends AppCompatActivity {
     }
 
     public void onResetButtonClicked(View button) {
-        for(int i = 0; i < 3; ++i) {
-            ToggleButton tglbtn = (ToggleButton) findViewById(R.id.toggleButton);
-            tglbtn.setChecked(false);
+        for (ToggleButton toggle : planAdapter.toggles) {
+            toggle.setChecked(false);
         }
+
 
     }
 }
