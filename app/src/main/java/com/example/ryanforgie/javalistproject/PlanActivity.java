@@ -18,6 +18,7 @@ public class PlanActivity extends AppCompatActivity {
     TextView counterView;
     Button resetButton;
     PlanAdapter planAdapter;
+    Tracker tracker;
 
 
 
@@ -30,7 +31,7 @@ public class PlanActivity extends AppCompatActivity {
         Plan plan  = new Plan();
         ArrayList<Run> week = plan.getWeek();
 
-        Tracker tracker = new Tracker();
+        tracker = new Tracker();
 
        planAdapter = new PlanAdapter(this, week, tracker);
 
@@ -53,13 +54,37 @@ public class PlanActivity extends AppCompatActivity {
     }
 
     public void onResetButtonClicked(View button) {
+        int currentCount = tracker.getCount();
         for (ToggleButton toggle : planAdapter.toggles) {
-            toggle.setChecked(false);
+            if (!toggle.isChecked()) {
+                tracker.setCount(currentCount = 0);
+            }
+            else if(toggle.isChecked()){
+                tracker.setCount(currentCount + 1);
+                toggle.setChecked(false);
+            }
+
         }
 
 
     }
 }
+
+//    public void onResetButtonClicked(View button) {
+//        int currentCount = tracker.getCount();
+//        for (ToggleButton toggle : planAdapter.toggles) {
+//            if (toggle.isChecked()) {
+//                tracker.setCount(currentCount + 1);
+//                toggle.setChecked(false);
+//            }
+//            else if(!toggle.isChecked()){
+//                tracker.setCount(0);
+//            }
+//
+//        }
+//
+//
+//    }
 
 //
 //        View button = findViewById(R.id.toggleButton);
