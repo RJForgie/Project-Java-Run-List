@@ -15,6 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -28,25 +31,24 @@ public class PlanAdapter extends ArrayAdapter<Run> {
 
     Tracker tracker;
     ArrayList<ToggleButton> toggles;
-//    private static SharedPreferences prefs;
+    ToggleButton toggle;
+
+
 
 
     public PlanAdapter(Context context, ArrayList<Run> week, Tracker tracker){
         super(context, 0, week);
         this.tracker = tracker;
-        toggles = new ArrayList<ToggleButton>();
     }
 
     @Override
-    public View getView(int position, View listItemView, ViewGroup parent) {
+    public View getView(final int position, View listItemView, ViewGroup parent) {
 
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.run_item, parent, false);
         }
 
-        Log.d("count", tracker.getCount().toString());
-
-        Run currentRun = getItem(position);
+        final Run currentRun = getItem(position);
 
         TextView type = listItemView.findViewById(R.id.type);
         type.setText(currentRun.getType().toString());
@@ -54,35 +56,51 @@ public class PlanAdapter extends ArrayAdapter<Run> {
         TextView distance = listItemView.findViewById(R.id.distance);
         distance.setText(currentRun.getDistance().toString());
 
-        ToggleButton toggle = listItemView.findViewById(R.id.toggleButton);
-//        listItemView.getTag();
-        toggle.setChecked(currentRun.completed);
-        toggles.add(toggle);
+        toggle = listItemView.findViewById(R.id.toggleButton);
+        toggle.setChecked(currentRun.checkCompleted());
 
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        toggle.setOnClickListener(new View.OnClickListener(){
 
-                AppCompatActivity planActivity = (AppCompatActivity) buttonView.getContext();
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity planActivity = (AppCompatActivity) v.getContext();
 
                 TextView counterView = (TextView) planActivity.findViewById(R.id.counter_view);
+                Log.d("planadapter", "hitting the onclick");
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences("run_list", Context.MODE_PRIVATE);
+                String weekJson = sharedPreferences.getString("week", new ArrayList<Run>().toString());
+                Gson gson = new Gson();
+                TypeToken< ArrayList<Run> > runArrayTypeToken = new TypeToken<ArrayList<Run>>(){};
+                ArrayList<Run> week = gson.fromJson(weekJson, runArrayTypeToken.getType());
+                int position = currentRun.getDistance() - 1;
 
+                currentRun.switchStatus();
+                week.get(position).switchStatus();
 
-
-                if (isChecked) {
-                    int currentCount = tracker.getCount();
+                int currentCount = tracker.getCount();
+                if(currentRun.checkCompleted() == true){
                     tracker.setCount(currentCount + 1);
-                    counterView.setText(Integer.toString(tracker.getCount()));
-                    saveCounter();
-
-
                 } else {
-                    int currentCount = tracker.getCount();
                     tracker.setCount(currentCount - 1);
-                    counterView.setText(Integer.toString(tracker.getCount()));
-                    saveCounter();
                 }
-            }});
+                saveCounter();
+                counterView.setText(String.valueOf(tracker.getCount()));
 
+                sharedPreferences.edit()
+                        .putString("week", gson.toJson(week))
+                        .apply();
+            }
+        });
+
+//                if (isChecked) {
+////                    tracker.setCount(currentCount + 1);
+////                    counterView.setText(Integer.toString(tracker.getCount()));
+////                    saveCounter();
+
+////                    int currentCount = tracker.getCount();
+////                    tracker.setCount(currentCount - 1);
+////                    counterView.setText(Integer.toString(tracker.getCount()));
+////                    saveCounter();
 
 
         listItemView.setTag(currentRun);
@@ -91,13 +109,14 @@ public class PlanAdapter extends ArrayAdapter<Run> {
 
     }
 
+
     public void saveCounter() {
 
         PreferenceManager.getDefaultSharedPreferences(getContext())
                 .edit()
                 .putInt("counter", tracker.getCount())
                 .apply();
-        Log.d("Sharedpref", "Saved to sharedpref");
+
     }
 
 }

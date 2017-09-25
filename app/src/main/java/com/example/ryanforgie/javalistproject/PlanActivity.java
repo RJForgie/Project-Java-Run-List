@@ -3,6 +3,7 @@ package com.example.ryanforgie.javalistproject;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Movie;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +14,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.Toolbar;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PlanActivity extends AppCompatActivity {
@@ -22,6 +26,7 @@ public class PlanActivity extends AppCompatActivity {
     Button resetButton;
     PlanAdapter planAdapter;
     Tracker tracker;
+    ArrayList<Run> week;
 
 
 
@@ -29,15 +34,26 @@ public class PlanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week);
-
         Plan plan  = new Plan();
-        ArrayList<Run> week = plan.getWeek();
+
+        // get week SP
+        SharedPreferences sharedPreferences = getSharedPreferences("run_list", Context.MODE_PRIVATE);
+        String weekJson = sharedPreferences.getString("week", new ArrayList<Run>().toString());
+        Gson gson = new Gson();
+        TypeToken< ArrayList<Run> > runArrayTypeToken = new TypeToken<ArrayList<Run>>(){};
+        week = gson.fromJson(weekJson, runArrayTypeToken.getType());
+
+
+        // create week if empty in SP
+        if(week.size() == 0){
+            week = plan.getWeek();
+            sharedPreferences.edit()
+                    .putString("week", gson.toJson(week))
+                    .apply();
+        }
 
         tracker = new Tracker();
-
         planAdapter = new PlanAdapter(this, week, tracker);
-
-
         ListView listView = (ListView) findViewById(R.id.week);
         listView.setAdapter(planAdapter);
 
@@ -46,11 +62,6 @@ public class PlanActivity extends AppCompatActivity {
         counterView = (TextView) findViewById(R.id.counter_view);
         counterView.setText(Integer.toString(tracker.getCount()));
 
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-
-//        int savedCounter = sharedPrefs.getInt("counter", 0);
-//
-//        tracker.setCount(savedCounter);
 
 
     }
@@ -67,23 +78,25 @@ public class PlanActivity extends AppCompatActivity {
 
     public void onResetButtonClicked(View button) {
         int currentCount = tracker.getCount();
-        for (ToggleButton toggle : planAdapter.toggles) {
-            if (!toggle.isChecked()) {
-                Log.d("lksajd", "hit the reset to 0");
+        for (Run run : week) {
+            if (!run.checkCompleted()) {
                 tracker.setCount(currentCount = 0);
                 saveCounter();
                 counterView.setText(String.valueOf(currentCount));
             }
-            else if(toggle.isChecked()){
+            else if(run.checkCompleted()){
                 tracker.setCount(currentCount + 1);
-                toggle.setChecked(false);
+                run.setStatus(false);
                 saveCounter();
                 counterView.setText(String.valueOf(currentCount));
             }
 
 
         }
+        planAdapter.notifyDataSetChanged();
 
+//        finish();
+//        startActivity(getIntent());
 
 
     }
