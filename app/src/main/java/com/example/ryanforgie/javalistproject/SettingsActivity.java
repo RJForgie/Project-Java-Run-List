@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -23,6 +24,8 @@ public class SettingsActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     ArrayList<Run> week;
     ArrayList<EditText> editTexts;
+    ArrayList<String> types;
+    ArrayAdapter<String> typeAdapter;
     Button saveButton;
     EditText firstRunDistance;
     EditText secondRunDistance;
@@ -33,13 +36,15 @@ public class SettingsActivity extends AppCompatActivity {
     EditText seventhRunDistance;
     Spinner firstRunType;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         editTexts = new ArrayList<>();
+        firstRunType = (Spinner) findViewById(R.id.type_spinner);
         this.setUpEditTextArray();
-        this.populateSpinner;
+        this.populateSpinner();
 
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -49,6 +54,9 @@ public class SettingsActivity extends AppCompatActivity {
         week = gson.fromJson(weekJson, runArrayTypeToken.getType());
 
         saveButton = (Button) findViewById(R.id.save_button);
+
+
+
     }
 
     public void setUpEditTextArray(){
@@ -69,18 +77,18 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void populateSpinner(){
-        categories = new ArrayList<>();
-        for (Category category: Category.values()){
-            String inputString = removeUnderscore(category.toString());
-            StringBuilder categoryCapitalized = new StringBuilder(inputString.toLowerCase());
-            categoryCapitalized.setCharAt(0, Character.toUpperCase(categoryCapitalized.charAt(0)));
-            categories.add(categoryCapitalized.toString());
+        types = new ArrayList<>();
+        for (Type type: Type.values()){
+//            String inputString = removeUnderscore(type.toString());
+//            StringBuilder categoryCapitalized = new StringBuilder(inpu.toLowerCase());
+//            categoryCapitalized.setCharAt(0, Character.toUpperCase(categoryCapitalized.charAt(0)));
+            types.add(type.toString());
         }
 
-        categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,categories);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,types);
+        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        category_spinner.setAdapter(categoryAdapter);
+        firstRunType.setAdapter(typeAdapter);
     }
 
     public void onSaveButtonClicked(View button) {
