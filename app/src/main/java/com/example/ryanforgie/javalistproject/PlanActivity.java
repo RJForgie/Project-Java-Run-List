@@ -31,6 +31,8 @@ public class PlanActivity extends AppCompatActivity {
     PlanAdapter planAdapter;
     Tracker tracker;
     ArrayList<Run> week;
+    SharedPreferences sharedPreferences;
+
 
 
     @Override
@@ -40,8 +42,10 @@ public class PlanActivity extends AppCompatActivity {
         Plan plan  = new Plan();
 
         // get week SP
-        SharedPreferences sharedPreferences = getSharedPreferences("run_list", Context.MODE_PRIVATE);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String weekJson = sharedPreferences.getString("week", new ArrayList<Run>().toString());
+        Integer counter = sharedPreferences.getInt("counter", 0);
+        Log.d("Counter:", String.valueOf(counter));
         Gson gson = new Gson();
         TypeToken< ArrayList<Run> > runArrayTypeToken = new TypeToken<ArrayList<Run>>(){};
         week = gson.fromJson(weekJson, runArrayTypeToken.getType());
@@ -55,7 +59,7 @@ public class PlanActivity extends AppCompatActivity {
                     .apply();
         }
 
-        tracker = new Tracker();
+        tracker = new Tracker(counter);
         planAdapter = new PlanAdapter(this, week, tracker);
         ListView listView = (ListView) findViewById(R.id.week);
         listView.setAdapter(planAdapter);
@@ -102,8 +106,7 @@ public class PlanActivity extends AppCompatActivity {
     }
 
     public void onResetButtonClicked(View button) {
-//        int currentCount = tracker.getCount();
-//        Log.d("currentount:", String.valueOf(currentCount));
+        Gson gson = new Gson();
         for (Run run : week) {
             if (!run.checkCompleted()) {
                 tracker.setCount(0);
@@ -115,13 +118,16 @@ public class PlanActivity extends AppCompatActivity {
                 saveCounter();
                 counterView.setText(String.valueOf(tracker.getCount()));
             }
-
         }
+        sharedPreferences.edit()
+                .putString("week", gson.toJson(week))
+                .apply();
+
         planAdapter.notifyDataSetChanged();
     }
 
     public void saveCounter() {
-
+        Log.d("PlanActicity:", "Saving Counter" + String.valueOf(tracker.getCount()));
         PreferenceManager.getDefaultSharedPreferences(this)
                 .edit()
                 .putInt("counter", tracker.getCount())

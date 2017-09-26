@@ -66,8 +66,7 @@ public class PlanAdapter extends ArrayAdapter<Run> {
                 AppCompatActivity planActivity = (AppCompatActivity) v.getContext();
 
                 TextView counterView = (TextView) planActivity.findViewById(R.id.counter_view);
-                Log.d("planadapter", "hitting the onclick");
-                SharedPreferences sharedPreferences = getContext().getSharedPreferences("run_list", Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 String weekJson = sharedPreferences.getString("week", new ArrayList<Run>().toString());
                 Gson gson = new Gson();
                 TypeToken< ArrayList<Run> > runArrayTypeToken = new TypeToken<ArrayList<Run>>(){};
@@ -85,7 +84,6 @@ public class PlanAdapter extends ArrayAdapter<Run> {
                     tracker.setCount(currentCount - 1);
                 }
                 saveCounter();
-                Log.d("total in adapter", tracker.getCount().toString());
                 counterView.setText(String.valueOf(tracker.getCount()));
 
                 sharedPreferences.edit()
@@ -113,7 +111,7 @@ public class PlanAdapter extends ArrayAdapter<Run> {
 
 
     public void saveCounter() {
-
+        Log.d("PlanAdapter", "saving counter" + tracker.getCount());
         PreferenceManager.getDefaultSharedPreferences(getContext())
                 .edit()
                 .putInt("counter", tracker.getCount())

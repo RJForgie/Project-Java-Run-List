@@ -13,6 +13,10 @@ public class Tracker {
     public Tracker() {
         this.count = 0;
     }
+    public Tracker(int count) {
+        this.count = count;
+    }
+
 
     public Integer getCount() {
         return count;
