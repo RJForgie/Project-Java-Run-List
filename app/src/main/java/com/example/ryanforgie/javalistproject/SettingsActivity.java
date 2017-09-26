@@ -151,8 +151,6 @@ public class SettingsActivity extends AppCompatActivity {
     public void updateTypesLocally() {
         for (int i = 0;i<week.size();i++) {
             String value = (String) spinners.get(i).getSelectedItem();
-
-
             Type type = Type.valueOf(value);
             week.get(i).setType(type);
         }

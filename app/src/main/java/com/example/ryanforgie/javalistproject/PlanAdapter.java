@@ -66,6 +66,7 @@ public class PlanAdapter extends ArrayAdapter<Run> {
                 AppCompatActivity planActivity = (AppCompatActivity) v.getContext();
 
                 TextView counterView = (TextView) planActivity.findViewById(R.id.counter_view);
+
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 String weekJson = sharedPreferences.getString("week", new ArrayList<Run>().toString());
                 Gson gson = new Gson();
