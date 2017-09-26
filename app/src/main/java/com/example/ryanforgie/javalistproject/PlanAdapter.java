@@ -85,7 +85,7 @@ public class PlanAdapter extends ArrayAdapter<Run> {
                     tracker.setCount(currentCount - 1);
                 }
                 saveCounter();
-                Log.d("total", tracker.getCount().toString());
+                Log.d("total in adapter", tracker.getCount().toString());
                 counterView.setText(String.valueOf(tracker.getCount()));
 
                 sharedPreferences.edit()

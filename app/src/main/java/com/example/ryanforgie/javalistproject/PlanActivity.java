@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-import android.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -27,7 +27,6 @@ public class PlanActivity extends AppCompatActivity {
     PlanAdapter planAdapter;
     Tracker tracker;
     ArrayList<Run> week;
-
 
 
     @Override
@@ -61,6 +60,7 @@ public class PlanActivity extends AppCompatActivity {
 
         counterView = (TextView) findViewById(R.id.counter_view);
         counterView.setText(Integer.toString(tracker.getCount()));
+        resetButton = (Button) findViewById(R.id.reset_button);
 
 
 
@@ -77,24 +77,23 @@ public class PlanActivity extends AppCompatActivity {
     }
 
     public void onResetButtonClicked(View button) {
-        int currentCount = tracker.getCount();
+//        int currentCount = tracker.getCount();
+//        Log.d("currentount:", String.valueOf(currentCount));
         for (Run run : week) {
             if (!run.checkCompleted()) {
-                tracker.setCount(currentCount = 0);
+                tracker.setCount(0);
                 saveCounter();
-                counterView.setText(String.valueOf(currentCount));
+                counterView.setText(String.valueOf(tracker.getCount()));
             }
             else if(run.checkCompleted()){
-                tracker.setCount(currentCount + 1);
                 run.setStatus(false);
                 saveCounter();
-                counterView.setText(String.valueOf(currentCount));
+                counterView.setText(String.valueOf(tracker.getCount()));
             }
-
 
         }
         planAdapter.notifyDataSetChanged();
-        Log.d("total", tracker.getCount().toString());
+        Log.d("total in planactivity", tracker.getCount().toString());
         Log.d("size", Integer.toString(week.size()));
 
 //        finish();
