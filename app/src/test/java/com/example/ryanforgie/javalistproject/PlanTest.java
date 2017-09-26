@@ -25,7 +25,6 @@ public class PlanTest {
     @Test
     public void testWeekPopulatedWithRuns() {
         assertEquals(Type.REST, plan.getWeek().get(0).getType());
-
     }
 
 }

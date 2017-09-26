@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="com.example.ryanforgie.javalistproject.PlanActivity">
 
     <!--<android.support.v7.widget.Toolbar-->
@@ -26,21 +27,28 @@
 
     <TextView
         android:id="@+id/counter_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="15dp"
         android:text="TextView"
-        android:textSize="30sp"
+        android:textSize="36sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/week"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/circular_bg"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="70dp"
+        android:layout_height="70dp" />
 
     <Button
         android:id="@+id/reset_button"
+        android:background = "@drawable/roundedbutton"
+        android:theme="@style/MyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -57,13 +65,18 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp" />
 
+
     <ListView
         android:id="@+id/week"
-        android:layout_width="364dp"
-        android:layout_height="369dp"
+        android:layout_width="wrap_content"
+        android:layout_height="450dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="0dp"
+        android:background="#FFFFFF"
+        android:dividerHeight="8.0sp"
+        android:divider="@color/colorPrimary"
+
          />
 
 </android.support.constraint.ConstraintLayout>
