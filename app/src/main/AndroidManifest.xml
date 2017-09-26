@@ -20,7 +20,10 @@
         <activity
             android:name=".DetailsActivity"
             android:parentActivityName=".PlanActivity" />
-        <activity android:name=".SettingsActivity"></activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".PlanActivity" />
+
     </application>
 
 </manifest>

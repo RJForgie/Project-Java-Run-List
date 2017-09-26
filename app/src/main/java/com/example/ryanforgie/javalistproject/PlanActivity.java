@@ -8,10 +8,14 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.support.v7.widget.Toolbar;
 import com.google.gson.Gson;
@@ -62,8 +66,29 @@ public class PlanActivity extends AppCompatActivity {
         counterView.setText(Integer.toString(tracker.getCount()));
         resetButton = (Button) findViewById(R.id.reset_button);
 
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.activity_week, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int selectedItemId = item.getItemId();
+        switch (selectedItemId) {
+            case R.id.action_settings:
+                goToSettings();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void goToSettings() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     public void getRun(View listItem) {
@@ -93,13 +118,6 @@ public class PlanActivity extends AppCompatActivity {
 
         }
         planAdapter.notifyDataSetChanged();
-        Log.d("total in planactivity", tracker.getCount().toString());
-        Log.d("size", Integer.toString(week.size()));
-
-//        finish();
-//        startActivity(getIntent());
-
-
     }
 
     public void saveCounter() {
