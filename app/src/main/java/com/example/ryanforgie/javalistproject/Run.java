@@ -46,4 +46,12 @@ public class Run implements Serializable {
     public int getId() {
         return id;
     }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
 }
