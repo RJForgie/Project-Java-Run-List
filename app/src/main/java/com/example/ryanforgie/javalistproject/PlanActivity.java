@@ -33,8 +33,6 @@ public class PlanActivity extends AppCompatActivity {
     ArrayList<Run> week;
     SharedPreferences sharedPreferences;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +99,9 @@ public class PlanActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, DetailsActivity.class);
 
-        intent.putExtra("runToShow", selectedRun.getType().toString());
+        intent.putExtra("runToShowType", selectedRun.getType().toString());
+        intent.putExtra("runToShowNotes", selectedRun.getNotes());
+        intent.putExtra("runToShowId", selectedRun.getId());
 
         startActivity(intent);
     }

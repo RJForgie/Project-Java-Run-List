@@ -28,13 +28,10 @@ import java.util.ArrayList;
 
 public class PlanAdapter extends ArrayAdapter<Run> {
 
-
     Tracker tracker;
-    ArrayList<ToggleButton> toggles;
     ToggleButton toggle;
-
-
-
+    ArrayList<Run> week;
+    SharedPreferences sharedPreferences;
 
     public PlanAdapter(Context context, ArrayList<Run> week, Tracker tracker){
         super(context, 0, week);
@@ -56,9 +53,9 @@ public class PlanAdapter extends ArrayAdapter<Run> {
         TextView distance = listItemView.findViewById(R.id.distance);
         distance.setText(currentRun.getDistance().toString());
 
+
         toggle = listItemView.findViewById(R.id.toggleButton);
         toggle.setChecked(currentRun.checkCompleted());
-
         toggle.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -67,11 +64,7 @@ public class PlanAdapter extends ArrayAdapter<Run> {
 
                 TextView counterView = (TextView) planActivity.findViewById(R.id.counter_view);
 
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-                String weekJson = sharedPreferences.getString("week", new ArrayList<Run>().toString());
-                Gson gson = new Gson();
-                TypeToken< ArrayList<Run> > runArrayTypeToken = new TypeToken<ArrayList<Run>>(){};
-                ArrayList<Run> week = gson.fromJson(weekJson, runArrayTypeToken.getType());
+                setUpSharedPreferences();
                 int id = currentRun.getId();
 
                 currentRun.switchStatus();
@@ -86,28 +79,23 @@ public class PlanAdapter extends ArrayAdapter<Run> {
                 }
                 saveCounter();
                 counterView.setText(String.valueOf(tracker.getCount()));
-
+                Gson gson = new Gson();
                 sharedPreferences.edit()
                         .putString("week", gson.toJson(week))
                         .apply();
             }
         });
 
-//                if (isChecked) {
-////                    tracker.setCount(currentCount + 1);
-////                    counterView.setText(Integer.toString(tracker.getCount()));
-////                    saveCounter();
-
-////                    int currentCount = tracker.getCount();
-////                    tracker.setCount(currentCount - 1);
-////                    counterView.setText(Integer.toString(tracker.getCount()));
-////                    saveCounter();
-
-
         listItemView.setTag(currentRun);
-
         return listItemView;
+    }
 
+    public void setUpSharedPreferences(){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String weekJson = sharedPreferences.getString("week", new ArrayList<Run>().toString());
+        Gson gson = new Gson();
+        TypeToken< ArrayList<Run> > runArrayTypeToken = new TypeToken<ArrayList<Run>>(){};
+        week = gson.fromJson(weekJson, runArrayTypeToken.getType());
     }
 
 

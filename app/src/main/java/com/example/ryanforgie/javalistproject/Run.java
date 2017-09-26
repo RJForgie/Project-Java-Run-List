@@ -12,6 +12,7 @@ public class Run implements Serializable {
     private Type type;
     private int distance;
     private boolean completed;
+    private String notes;
 //    private  dayName;
 
 
@@ -21,6 +22,7 @@ public class Run implements Serializable {
         this.type = type;
         this.distance = distance;
         this.completed = completed;
+        this.notes = "";
     }
 
     public Enum getType() {
@@ -53,5 +55,13 @@ public class Run implements Serializable {
 
     public void setDistance(int distance) {
         this.distance = distance;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }
