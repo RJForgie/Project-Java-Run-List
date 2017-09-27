@@ -22,8 +22,8 @@ public class DetailsActivity extends AppCompatActivity {
     ArrayList<Run> week;
     int runToShowId;
     Button saveButton;
-//    DetailsActivity detailsActivity;
-//    String runToShowNotes;
+    String runToShowType;
+    String runToShowNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,22 +31,51 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
         this.setUpSharedPreferences();
 
+
+//        Set up views
         runType = (TextView) findViewById(R.id.run_type);
         runDescription = (TextView) findViewById(R.id.run_description);
         runNotes = (EditText) findViewById(R.id.notes_view);
         saveButton = (Button) findViewById(R.id.save_details_button);
 
+//        Get information from intent
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-
-        String runToShowType = extras.getString("runToShowType");
-        String runToShowNotes = extras.getString("runToShowNotes");
+        runToShowType = extras.getString("runToShowType");
+        runToShowNotes = extras.getString("runToShowNotes");
         runToShowId = extras.getInt("runToShowId");
 
         runNotes.setText(runToShowNotes);
         runType.setText("Run Type:  " + runToShowType);
 
+        this.getCorrectDescription();
 
+    }
+
+    public void onSaveButtonClicked(View button) {
+        Gson gson = new Gson();
+        String getNotes = runNotes.getText().toString();
+        for (Run run: week) {
+            if (run.getId() == runToShowId) {
+                run.setNotes(getNotes);
+            }
+        }
+
+        sharedPreferences.edit()
+                .putString("week", gson.toJson(week))
+                .apply();
+        runNotes.setText(getNotes);
+    }
+
+    public void setUpSharedPreferences() {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String weekJson = sharedPreferences.getString("week", new ArrayList<Run>().toString());
+        Gson gson = new Gson();
+        TypeToken< ArrayList<Run> > runArrayTypeToken = new TypeToken<ArrayList<Run>>(){};
+        week = gson.fromJson(weekJson, runArrayTypeToken.getType());
+    }
+
+    public void getCorrectDescription() {
         if (runToShowType.equals("REST")) {
             runDescription.setText(getResources().getString(R.string.rest));
         } else if (runToShowType.equals("TEMPO")) {
@@ -73,29 +102,6 @@ public class DetailsActivity extends AppCompatActivity {
         } else if (runToShowType.equals("FARTLEK")) {
             runDescription.setText(getResources().getString(R.string.fartlek));
         }
-    }
-
-    public void onSaveButtonClicked(View button) {
-        Gson gson = new Gson();
-        String getNotes = runNotes.getText().toString();
-        for (Run run: week) {
-            if (run.getId() == runToShowId) {
-                run.setNotes(getNotes);
-            }
-        }
-
-        sharedPreferences.edit()
-                .putString("week", gson.toJson(week))
-                .apply();
-        runNotes.setText(getNotes);
-    }
-
-    public void setUpSharedPreferences() {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String weekJson = sharedPreferences.getString("week", new ArrayList<Run>().toString());
-        Gson gson = new Gson();
-        TypeToken< ArrayList<Run> > runArrayTypeToken = new TypeToken<ArrayList<Run>>(){};
-        week = gson.fromJson(weekJson, runArrayTypeToken.getType());
     }
 }
 
