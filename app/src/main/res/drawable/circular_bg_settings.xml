@@ -2,8 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval" >
     <gradient
-        android:endColor="#B2DFDB"
-        android:startColor="#B2DFDB" />
+        android:endColor="@color/lightTextViewBackground"
+        android:startColor="@color/lightTextViewBackground" />
 
     <padding
         android:bottom="1.5dp"

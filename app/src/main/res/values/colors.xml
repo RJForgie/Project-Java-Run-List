@@ -3,4 +3,5 @@
     <color name="colorPrimary">#009688</color>
     <color name="colorPrimaryDark">#004D40</color>
     <color name="colorAccent">#000000</color>
+    <color name="lightTextViewBackground">#B2DFDB</color>
 </resources>
