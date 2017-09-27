@@ -9,10 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.util.ArrayList;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -49,7 +47,6 @@ public class DetailsActivity extends AppCompatActivity {
         runType.setText("Run Type:  " + runToShowType);
 
 
-
         if (runToShowType.equals("REST")) {
             runDescription.setText(getResources().getString(R.string.rest));
         } else if (runToShowType.equals("TEMPO")) {
@@ -74,10 +71,8 @@ public class DetailsActivity extends AppCompatActivity {
             runDescription.setText(getResources().getString(R.string.intervals));
 
         } else if (runToShowType.equals("FARTLEK")) {
-        runDescription.setText(getResources().getString(R.string.intervals));
-    }
-
-
+            runDescription.setText(getResources().getString(R.string.fartlek));
+        }
     }
 
     public void onSaveButtonClicked(View button) {
@@ -102,7 +97,5 @@ public class DetailsActivity extends AppCompatActivity {
         TypeToken< ArrayList<Run> > runArrayTypeToken = new TypeToken<ArrayList<Run>>(){};
         week = gson.fromJson(weekJson, runArrayTypeToken.getType());
     }
-
-
 }
 
