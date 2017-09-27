@@ -50,43 +50,44 @@ public class DetailsActivity extends AppCompatActivity {
 
 
         if (runToShowType.equals("REST")) {
-            runType.setText(getResources().getString(R.string.rest));
+            runDescription.setText(getResources().getString(R.string.rest));
         } else if (runToShowType.equals("TEMPO")) {
-            runType.setText(getResources().getString(R.string.tempo));
+            runDescription.setText(getResources().getString(R.string.tempo));
 
         } else if (runToShowType.equals("RECOVERY")) {
-            runType.setText(getResources().getString(R.string.recovery));
+            runDescription.setText(getResources().getString(R.string.recovery));
 
         } else if (runToShowType.equals("BASE")) {
-            runType.setText(getResources().getString(R.string.base));
+            runDescription.setText(getResources().getString(R.string.base));
 
         } else if (runToShowType.equals("LONG")) {
-            runType.setText(getResources().getString(R.string.long_run));
+            runDescription.setText(getResources().getString(R.string.long_run));
 
         } else if (runToShowType.equals("PROGRESSION")) {
-            runType.setText(getResources().getString(R.string.progression_run));
+            runDescription.setText(getResources().getString(R.string.progression_run));
 
         } else if (runToShowType.equals("HILLREPEATS")) {
-            runType.setText(getResources().getString(R.string.hill_repeats));
+            runDescription.setText(getResources().getString(R.string.hill_repeats));
 
         } else if (runToShowType.equals("INTERVALS")) {
-            runType.setText(getResources().getString(R.string.intervals));
+            runDescription.setText(getResources().getString(R.string.intervals));
         }
 
     }
 
     public void onSaveButtonClicked(View button) {
         Gson gson = new Gson();
+        String getNotes = runNotes.getText().toString();
         for (Run run: week) {
             if (run.getId() == runToShowId) {
-                run.setNotes(runNotes.toString());
+                run.setNotes(getNotes);
             }
         }
 
         sharedPreferences.edit()
                 .putString("week", gson.toJson(week))
                 .apply();
-        runNotes.setText(runToShowNotes);
+        runNotes.setText(getNotes);
     }
 
     public void setUpSharedPreferences() {
