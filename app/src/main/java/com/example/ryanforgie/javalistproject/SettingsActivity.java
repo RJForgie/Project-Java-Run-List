@@ -123,13 +123,17 @@ public class SettingsActivity extends AppCompatActivity {
         typeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,types);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        firstRunType.setAdapter(typeAdapter);
-        secondRunType.setAdapter(typeAdapter);
-        thirdRunType.setAdapter(typeAdapter);
-        fourthRunType.setAdapter(typeAdapter);
-        fifthRunType.setAdapter(typeAdapter);
-        sixthRunType.setAdapter(typeAdapter);
-        seventhRunType.setAdapter(typeAdapter);
+        for (int i = 0; i < week.size(); i++) {
+        spinners.get(i).setAdapter(typeAdapter);
+        }
+
+//        firstRunType.setAdapter(typeAdapter);
+//        secondRunType.setAdapter(typeAdapter);
+//        thirdRunType.setAdapter(typeAdapter);
+//        fourthRunType.setAdapter(typeAdapter);
+//        fifthRunType.setAdapter(typeAdapter);
+//        sixthRunType.setAdapter(typeAdapter);
+//        seventhRunType.setAdapter(typeAdapter);
     }
 
     public void setSpinnerDefaults() {
@@ -137,7 +141,6 @@ public class SettingsActivity extends AppCompatActivity {
                 int index = week.get(i).getType().ordinal();
                 spinners.get(i).setSelection(index);
             }
-
     }
 
     public void onSaveButtonClicked(View button) {
