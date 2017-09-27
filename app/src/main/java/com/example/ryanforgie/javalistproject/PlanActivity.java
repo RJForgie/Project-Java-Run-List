@@ -86,12 +86,20 @@ public class PlanActivity extends AppCompatActivity {
             case R.id.action_settings:
                 goToSettings();
                 return true;
+            case R.id.action_instructions:
+                goToInstructions();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     public void goToSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToInstructions() {
+        Intent intent = new Intent(this, InstructionsActivity.class);
         startActivity(intent);
     }
 

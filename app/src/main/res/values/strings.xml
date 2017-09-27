@@ -10,5 +10,6 @@
     <string name="tempo">\n Tips: \n A tempo run is a sustained effort at lactate threshold intensity, which is the fastest pace that can be sustained for 20 minutes. \n \n Example: 1 mile of easy jogging (warmup) + 4 miles at lactate threshold pace + 1 mile of easy jogging (cooldown) \n</string>
     <string name="intervals">\n Tips: \n Interval workouts consist of repeated shorter segments of fast running separated by slow jogging or standing recoveries. \n \n Example: 1 mile of easy jogging (warmup) + 5 x 1K at 5K race pace with 400m jogging recoveries + 1 mile of easy jogging (cooldown) \n</string>
     <string name="toggle_action">TOGGLE</string>
+    <string name="instructions">\n 1. Use the settings page to set up runs for the week \n \n 2. As you complete each run toggle the button \n \n 3. The yellow counter will show your streak of completed runs \n \n 4. At the end of the week click END WEEK \n \n 5. If you miss a day your streak will be lost \n</string>
 
 </resources>
