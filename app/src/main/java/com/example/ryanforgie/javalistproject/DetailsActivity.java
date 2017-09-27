@@ -32,13 +32,13 @@ public class DetailsActivity extends AppCompatActivity {
         this.setUpSharedPreferences();
 
 
-//        Set up views
+        //Set up views
         runType = (TextView) findViewById(R.id.run_type);
         runDescription = (TextView) findViewById(R.id.run_description);
         runNotes = (EditText) findViewById(R.id.notes_view);
         saveButton = (Button) findViewById(R.id.save_details_button);
 
-//        Get information from intent
+        //Get information from intent
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         runToShowType = extras.getString("runToShowType");
@@ -51,6 +51,8 @@ public class DetailsActivity extends AppCompatActivity {
         this.getCorrectDescription();
 
     }
+
+    // Save button
 
     public void onSaveButtonClicked(View button) {
         Gson gson = new Gson();
@@ -67,6 +69,8 @@ public class DetailsActivity extends AppCompatActivity {
         runNotes.setText(getNotes);
     }
 
+    // Shared prefs helper
+
     public void setUpSharedPreferences() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String weekJson = sharedPreferences.getString("week", new ArrayList<Run>().toString());
@@ -75,7 +79,8 @@ public class DetailsActivity extends AppCompatActivity {
         week = gson.fromJson(weekJson, runArrayTypeToken.getType());
     }
 
-//    Change to switch statements when possible
+    // Change to switch statement when possible
+
     public void getCorrectDescription() {
         if (runToShowType.equals("REST")) {
             runDescription.setText(getResources().getString(R.string.rest));

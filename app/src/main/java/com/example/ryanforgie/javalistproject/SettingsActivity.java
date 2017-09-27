@@ -49,23 +49,13 @@ public class SettingsActivity extends AppCompatActivity {
         editTexts = new ArrayList<>();
         spinners = new ArrayList<>();
         this.setUpEditTextArray();
+        this.setDefaultsEditTextArray();
         this.setUpSpinnerViews();
         this.populateSpinner();
         this.setSpinnerDefaults();
 
-
-
         saveButton = (Button) findViewById(R.id.save_button);
     }
-
-    public void setUpSharedPreferences() {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String weekJson = sharedPreferences.getString("week", new ArrayList<Run>().toString());
-        Gson gson = new Gson();
-        TypeToken< ArrayList<Run> > runArrayTypeToken = new TypeToken<ArrayList<Run>>(){};
-        week = gson.fromJson(weekJson, runArrayTypeToken.getType());
-    }
-
 
     public void setUpSpinnerViews() {
 
@@ -89,34 +79,30 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void setUpEditTextArray(){
         firstRunDistance = (EditText) findViewById(R.id.first_run_distance);
-        firstRunDistance.setText(week.get(0).getDistance().toString());
         editTexts.add(firstRunDistance);
         secondRunDistance = (EditText) findViewById(R.id.second_run_distance);
-        secondRunDistance.setText(week.get(1).getDistance().toString());
         editTexts.add(secondRunDistance);
         thirdRunDistance = (EditText) findViewById(R.id.third_run_distance);
-        thirdRunDistance.setText(week.get(2).getDistance().toString());
         editTexts.add(thirdRunDistance);
         fourthRunDistance = (EditText) findViewById(R.id.fourth_run_distance);
-        fourthRunDistance.setText(week.get(3).getDistance().toString());
         editTexts.add(fourthRunDistance);
         fifthRunDistance = (EditText) findViewById(R.id.fifth_run_distance);
-        fifthRunDistance.setText(week.get(4).getDistance().toString());
         editTexts.add(fifthRunDistance);
         sixthRunDistance = (EditText) findViewById(R.id.sixth_run_distance);
-        sixthRunDistance.setText(week.get(5).getDistance().toString());
         editTexts.add(sixthRunDistance);
         seventhRunDistance = (EditText) findViewById(R.id.seventh_run_distance);
-        seventhRunDistance.setText(week.get(6).getDistance().toString());
         editTexts.add(seventhRunDistance);
+    }
+
+    public void setDefaultsEditTextArray(){
+        for (int i = 0; i < week.size(); i++) {
+            editTexts.get(i).setText(week.get(i).getDistance().toString());
+        }
     }
 
     public void populateSpinner(){
         types = new ArrayList<>();
         for (Type type: Type.values()){
-//            String inputString = removeUnderscore(type.toString());
-//            StringBuilder categoryCapitalized = new StringBuilder(input.toLowerCase());
-//            categoryCapitalized.setCharAt(0, Character.toUpperCase(categoryCapitalized.charAt(0)));
             types.add(type.toString());
         }
 
@@ -126,14 +112,6 @@ public class SettingsActivity extends AppCompatActivity {
         for (int i = 0; i < week.size(); i++) {
         spinners.get(i).setAdapter(typeAdapter);
         }
-
-//        firstRunType.setAdapter(typeAdapter);
-//        secondRunType.setAdapter(typeAdapter);
-//        thirdRunType.setAdapter(typeAdapter);
-//        fourthRunType.setAdapter(typeAdapter);
-//        fifthRunType.setAdapter(typeAdapter);
-//        sixthRunType.setAdapter(typeAdapter);
-//        seventhRunType.setAdapter(typeAdapter);
     }
 
     public void setSpinnerDefaults() {
@@ -168,6 +146,14 @@ public class SettingsActivity extends AppCompatActivity {
             Type type = Type.valueOf(value);
             week.get(i).setType(type);
         }
+    }
+
+    public void setUpSharedPreferences() {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String weekJson = sharedPreferences.getString("week", new ArrayList<Run>().toString());
+        Gson gson = new Gson();
+        TypeToken< ArrayList<Run> > runArrayTypeToken = new TypeToken<ArrayList<Run>>(){};
+        week = gson.fromJson(weekJson, runArrayTypeToken.getType());
     }
 
 }
