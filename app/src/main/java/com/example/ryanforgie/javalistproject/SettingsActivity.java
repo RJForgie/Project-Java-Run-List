@@ -1,5 +1,6 @@
 package com.example.ryanforgie.javalistproject;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -136,6 +137,9 @@ public class SettingsActivity extends AppCompatActivity {
         sharedPreferences.edit()
                 .putString("week", gson.toJson(week))
                 .apply();
+        Intent intent = new Intent(this, PlanActivity.class);
+        startActivity(intent);
+
 
     }
 

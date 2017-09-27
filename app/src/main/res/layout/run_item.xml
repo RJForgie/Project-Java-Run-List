@@ -8,45 +8,57 @@
    >
 
     <TextView
+        android:id="@+id/KM"
+        android:layout_width="30dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="35dp"
+        android:text="KM"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toRightOf="@+id/distance"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/distance"
-        android:layout_width="72dp"
+        android:layout_width="50dp"
         android:layout_height="72dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="20dp"
         android:text="TextView"
+        android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textSize="36sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/type"
-        android:layout_width="0dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="30dp"
         android:text="TextView"
         android:textSize="25sp"
-        app:layout_constraintLeft_toRightOf="@+id/distance"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_default="wrap" />
+        app:layout_constraintWidth_default="wrap"
+        app:layout_constraintLeft_toRightOf="@+id/KM"
+        android:layout_marginLeft="20dp" />
 
     <ToggleButton
         android:id="@+id/toggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/roundedbutton"
         android:text="ToggleButton"
         android:textOff="To Do"
         android:textOn="Done"
         android:textIsSelectable="false"
-        app:layout_constraintLeft_toRightOf="@+id/type"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/type"
+        android:layout_marginLeft="25dp" />
 
 
 </android.support.constraint.ConstraintLayout>
