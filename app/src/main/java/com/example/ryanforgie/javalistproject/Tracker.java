@@ -8,11 +8,14 @@ import java.net.Inet4Address;
 
 public class Tracker {
 
+    //class potentially redundant due to shared preferences, remove in future refactor
+
     private int count;
 
     public Tracker() {
         this.count = 0;
     }
+
     public Tracker(int count) {
         this.count = count;
     }

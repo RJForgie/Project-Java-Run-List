@@ -13,9 +13,6 @@ public class Run implements Serializable {
     private int distance;
     private boolean completed;
     private String notes;
-//    private  dayName;
-
-
 
     public Run(Integer id, Type type, Integer distance, boolean completed) {
         this.id = id;

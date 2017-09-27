@@ -9,5 +9,7 @@ public class InstructionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructions);
+
+        //Nothing needed here, activity only displays static TextView
     }
 }

@@ -75,6 +75,7 @@ public class DetailsActivity extends AppCompatActivity {
         week = gson.fromJson(weekJson, runArrayTypeToken.getType());
     }
 
+//    Change to switch statements when possible
     public void getCorrectDescription() {
         if (runToShowType.equals("REST")) {
             runDescription.setText(getResources().getString(R.string.rest));
