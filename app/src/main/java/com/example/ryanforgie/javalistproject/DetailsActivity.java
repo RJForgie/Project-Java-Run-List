@@ -43,7 +43,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         String runToShowType = extras.getString("runToShowType");
         String runToShowNotes = extras.getString("runToShowNotes");
-        int runToShowId = extras.getInt("runToShowId");
+        runToShowId = extras.getInt("runToShowId");
 
         runNotes.setText(runToShowNotes);
 
@@ -71,7 +71,11 @@ public class DetailsActivity extends AppCompatActivity {
 
         } else if (runToShowType.equals("INTERVALS")) {
             runDescription.setText(getResources().getString(R.string.intervals));
-        }
+
+        } else if (runToShowType.equals("FARTLEK")) {
+        runDescription.setText(getResources().getString(R.string.intervals));
+    }
+
 
     }
 
@@ -96,7 +100,6 @@ public class DetailsActivity extends AppCompatActivity {
         Gson gson = new Gson();
         TypeToken< ArrayList<Run> > runArrayTypeToken = new TypeToken<ArrayList<Run>>(){};
         week = gson.fromJson(weekJson, runArrayTypeToken.getType());
-
     }
 
 

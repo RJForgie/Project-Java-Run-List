@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -107,12 +108,15 @@ public class PlanActivity extends AppCompatActivity {
     }
 
     public void onResetButtonClicked(View button) {
+        checkIfDisplayStreakToast();
         Gson gson = new Gson();
         for (Run run : week) {
             if (!run.checkCompleted()) {
                 tracker.setCount(0);
                 saveCounter();
                 counterView.setText(String.valueOf(tracker.getCount()));
+                checkLostStreak();
+
             }
             else if(run.checkCompleted()){
                 run.setStatus(false);
@@ -125,6 +129,7 @@ public class PlanActivity extends AppCompatActivity {
                 .apply();
 
         planAdapter.notifyDataSetChanged();
+
     }
 
     public void saveCounter() {
@@ -135,7 +140,26 @@ public class PlanActivity extends AppCompatActivity {
                 .apply();
 
     }
+
+    public void checkIfDisplayStreakToast(){
+        if ((tracker.getCount() % 7 == 0) && (tracker.getCount() != 0)) {
+            makeToast("Week Streak", Toast.LENGTH_SHORT);
+        }
+    }
+
+    public void checkLostStreak() {
+        makeToast("Streak Lost", Toast.LENGTH_SHORT);
+
+    }
+
+    public void makeToast(String message, int length) {
+        Toast toast = Toast.makeText(this, message, length);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
 }
+
+
 
 //    public void onResetButtonClicked(View button) {
 //        int currentCount = tracker.getCount();
