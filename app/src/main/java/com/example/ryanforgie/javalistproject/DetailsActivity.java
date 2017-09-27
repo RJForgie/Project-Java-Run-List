@@ -67,6 +67,8 @@ public class DetailsActivity extends AppCompatActivity {
                 .putString("week", gson.toJson(week))
                 .apply();
         runNotes.setText(getNotes);
+        Intent intent = new Intent(this, PlanActivity.class);
+        startActivity(intent);
     }
 
     // Shared prefs helper
