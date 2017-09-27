@@ -2,24 +2,16 @@ package com.example.ryanforgie.javalistproject;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.icu.text.LocaleDisplayNames;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 /**
@@ -58,27 +50,33 @@ public class PlanAdapter extends ArrayAdapter<Run> {
         toggle.setChecked(currentRun.checkCompleted());
         toggle.setOnClickListener(new View.OnClickListener(){
 
+
+            //Needs refactored into smaller methods in future
             @Override
             public void onClick(View v) {
+                // Get views needed
                 AppCompatActivity planActivity = (AppCompatActivity) v.getContext();
-
                 TextView counterView = (TextView) planActivity.findViewById(R.id.counter_view);
 
                 setUpSharedPreferences();
-                int id = currentRun.getId();
 
+               //Update Model
+                int id = currentRun.getId();
                 currentRun.switchStatus();
                 week.get(id).switchStatus();
 
                 int currentCount = tracker.getCount();
-                if(currentRun.checkCompleted() == true){
+                if(currentRun.checkCompleted()){
                     tracker.setCount(currentCount + 1);
 
                 } else {
                     tracker.setCount(currentCount - 1);
                 }
+
                 saveCounter();
                 counterView.setText(String.valueOf(tracker.getCount()));
+
+                // save new model
                 Gson gson = new Gson();
                 sharedPreferences.edit()
                         .putString("week", gson.toJson(week))
@@ -90,6 +88,7 @@ public class PlanAdapter extends ArrayAdapter<Run> {
         return listItemView;
     }
 
+
     public void setUpSharedPreferences(){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         String weekJson = sharedPreferences.getString("week", new ArrayList<Run>().toString());
@@ -100,17 +99,12 @@ public class PlanAdapter extends ArrayAdapter<Run> {
 
 
     public void saveCounter() {
-        Log.d("PlanAdapter", "saving counter" + tracker.getCount());
         PreferenceManager.getDefaultSharedPreferences(getContext())
                 .edit()
                 .putInt("counter", tracker.getCount())
                 .apply();
-
     }
-
 }
 
 
-//        ImageView flag = (ImageView) listItemView.findViewById(R.id.flag);
-//        flag.setImageResource(currentCity.getImageId());
 

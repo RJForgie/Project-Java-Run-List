@@ -10,11 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -58,7 +55,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void setUpSpinnerViews() {
-
         firstRunType = (Spinner) findViewById(R.id.first_type_spinner);
         spinners.add(firstRunType);
         firstRunType.setSelection(3);
