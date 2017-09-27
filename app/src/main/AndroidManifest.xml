@@ -23,7 +23,6 @@
         <activity
             android:name=".SettingsActivity"
             android:parentActivityName=".PlanActivity" />
-
     </application>
 
 </manifest>

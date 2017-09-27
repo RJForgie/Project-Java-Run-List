@@ -46,6 +46,7 @@ public class DetailsActivity extends AppCompatActivity {
         runToShowId = extras.getInt("runToShowId");
 
         runNotes.setText(runToShowNotes);
+        runType.setText(runToShowType);
 
 
 
