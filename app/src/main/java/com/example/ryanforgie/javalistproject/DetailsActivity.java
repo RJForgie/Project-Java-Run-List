@@ -22,8 +22,8 @@ public class DetailsActivity extends AppCompatActivity {
     ArrayList<Run> week;
     int runToShowId;
     Button saveButton;
-    DetailsActivity detailsActivity;
-    String runToShowNotes;
+//    DetailsActivity detailsActivity;
+//    String runToShowNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +59,13 @@ public class DetailsActivity extends AppCompatActivity {
             runDescription.setText(getResources().getString(R.string.base));
 
         } else if (runToShowType.equals("LONG")) {
-            runDescription.setText(getResources().getString(R.string.long_run));
+            runDescription.setText(getResources().getString(R.string.longrun));
 
         } else if (runToShowType.equals("PROGRESSION")) {
-            runDescription.setText(getResources().getString(R.string.progression_run));
+            runDescription.setText(getResources().getString(R.string.progression));
 
         } else if (runToShowType.equals("HILLREPEATS")) {
-            runDescription.setText(getResources().getString(R.string.hill_repeats));
+            runDescription.setText(getResources().getString(R.string.hillrepeats));
 
         } else if (runToShowType.equals("INTERVALS")) {
             runDescription.setText(getResources().getString(R.string.intervals));
