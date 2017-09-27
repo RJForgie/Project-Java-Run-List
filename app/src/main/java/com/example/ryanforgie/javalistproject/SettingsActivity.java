@@ -41,8 +41,6 @@ public class SettingsActivity extends AppCompatActivity {
     Spinner sixthRunType;
     Spinner seventhRunType;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +51,9 @@ public class SettingsActivity extends AppCompatActivity {
         this.setUpEditTextArray();
         this.setUpSpinnerViews();
         this.populateSpinner();
+        this.setSpinnerDefaults();
+
+
 
         saveButton = (Button) findViewById(R.id.save_button);
     }
@@ -63,13 +64,14 @@ public class SettingsActivity extends AppCompatActivity {
         Gson gson = new Gson();
         TypeToken< ArrayList<Run> > runArrayTypeToken = new TypeToken<ArrayList<Run>>(){};
         week = gson.fromJson(weekJson, runArrayTypeToken.getType());
-
     }
 
 
     public void setUpSpinnerViews() {
+
         firstRunType = (Spinner) findViewById(R.id.first_type_spinner);
         spinners.add(firstRunType);
+        firstRunType.setSelection(3);
         secondRunType = (Spinner) findViewById(R.id.second_type_spinner);
         spinners.add(secondRunType);
         thirdRunType = (Spinner) findViewById(R.id.third_type_spinner);
@@ -130,6 +132,14 @@ public class SettingsActivity extends AppCompatActivity {
         seventhRunType.setAdapter(typeAdapter);
     }
 
+    public void setSpinnerDefaults() {
+            for (int i = 0; i < week.size(); i++) {
+                int index = week.get(i).getType().ordinal();
+                spinners.get(i).setSelection(index);
+            }
+
+    }
+
     public void onSaveButtonClicked(View button) {
         Gson gson = new Gson();
         updateDistancesLocally();
@@ -139,8 +149,6 @@ public class SettingsActivity extends AppCompatActivity {
                 .apply();
         Intent intent = new Intent(this, PlanActivity.class);
         startActivity(intent);
-
-
     }
 
     public void updateDistancesLocally(){
@@ -149,7 +157,6 @@ public class SettingsActivity extends AppCompatActivity {
             int integerValue = Integer.parseInt(value);
             week.get(i).setDistance(integerValue);
         }
-
     }
 
     public void updateTypesLocally() {
