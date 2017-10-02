@@ -7,3 +7,5 @@ Android mobile app to plan running sessions for the week and reward the user for
 Built in Android Studio to work on Java and mobile development.
 
 ## Screenshots
+
+![screenshots](https://github.com/RJForgie/Project-Java-Run-List/blob/master/screenshot.png "App Screenshots")
