@@ -15,7 +15,7 @@ You are required to build an Android app which will allow a user to maintain a l
 Project Extensions
 •	Visual representation of counter
 •	Positive feedback
-•	Custom type of run (custom description)
+
 
 
 ## Screenshots
